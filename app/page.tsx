@@ -25,6 +25,7 @@ import {
 import { useState, useRef } from "react"
 import { useInView } from "framer-motion"
 import { FAQSection } from "@/components/sections/faq-section"
+import { TestimonialsSection } from "@/components/sections/testimonials-section"
 
 // Enhanced Button Component with micro-animations
 function Button({ children, className = "", variant = "default", size = "default", ...props }: any) {
@@ -929,6 +930,7 @@ export default function HomePage() {
         <HeroSection />
         <FeaturesSection />
         <PricingSection />
+        <TestimonialsSection />
         <FAQSection />
       </main>
       <Footer />
