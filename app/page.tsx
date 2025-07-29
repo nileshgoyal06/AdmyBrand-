@@ -24,6 +24,7 @@ import {
 } from "lucide-react"
 import { useState, useRef } from "react"
 import { useInView } from "framer-motion"
+import { FAQSection } from "@/components/sections/faq-section"
 
 // Enhanced Button Component with micro-animations
 function Button({ children, className = "", variant = "default", size = "default", ...props }: any) {
@@ -135,10 +136,16 @@ function Navbar() {
           </motion.div>
 
           <div className="hidden md:flex items-center space-x-8">
-            {["Features", "Pricing", "About", "Contact"].map((item, index) => (
+            { ["Features", "Pricing", "FAQ's", "Contact"].map((item, index) => (
               <motion.a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={
+                  item === "FAQ's"
+                    ? "#faq"
+                    : item === "Contact"
+                    ? "#footer"
+                    : `#${item.toLowerCase()}`
+                }
                 className="text-white/80 hover:text-white transition-colors duration-300 font-medium relative group"
                 whileHover={{ y: -2 }}
                 initial={{ opacity: 0, y: -20 }}
@@ -148,7 +155,7 @@ function Navbar() {
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-full transition-all duration-300" />
               </motion.a>
-            ))}
+            )) }
           </div>
 
           <motion.div
@@ -189,10 +196,16 @@ function Navbar() {
         className="md:hidden bg-black/90 backdrop-blur-xl border-t border-white/10 overflow-hidden"
       >
         <div className="px-4 py-6 space-y-4">
-          {["Features", "Pricing", "About", "Contact"].map((item, index) => (
+          { ["Features", "Pricing", "FAQ's", "Contact"].map((item, index) => (
             <motion.a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={
+                item === "FAQ's"
+                  ? "#faq"
+                  : item === "Contact"
+                  ? "#footer"
+                  : `#${item.toLowerCase()}`
+              }
               className="block text-white/80 hover:text-white transition-colors py-2 font-medium"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -201,7 +214,7 @@ function Navbar() {
             >
               {item}
             </motion.a>
-          ))}
+          )) }
           <Button className="w-full mt-4">Get Started Free</Button>
         </div>
       </motion.div>
@@ -321,50 +334,6 @@ function HeroSection() {
             </motion.div>
             Watch Live Demo
           </Button>
-        </motion.div>
-
-        {/* Feature Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
-        >
-          {[
-            {
-              icon: Zap,
-              title: "Lightning Fast",
-              desc: "Deploy campaigns in seconds",
-              color: "from-yellow-400 to-orange-500",
-            },
-            {
-              icon: Target,
-              title: "Precision AI",
-              desc: "99.9% accuracy targeting",
-              color: "from-green-400 to-emerald-500",
-            },
-            {
-              icon: TrendingUp,
-              title: "10x Growth",
-              desc: "Average ROI increase",
-              color: "from-blue-400 to-purple-500",
-            },
-          ].map((feature, index) => (
-            <GlassCard key={index} delay={index * 0.2} className="p-8 text-center group">
-              <motion.div
-                className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} p-4 mx-auto mb-4`}
-                whileHover={{
-                  rotate: 360,
-                  scale: 1.1,
-                }}
-                transition={{ duration: 0.6 }}
-              >
-                <feature.icon className="w-8 h-8 text-white" />
-              </motion.div>
-              <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
-              <p className="text-white/70">{feature.desc}</p>
-            </GlassCard>
-          ))}
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -828,7 +797,7 @@ function PricingSection() {
 // Enhanced Footer
 function Footer() {
   return (
-    <footer className="relative bg-black/40 backdrop-blur-xl border-t border-white/10 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <footer id="footer" className="relative bg-black/40 backdrop-blur-xl border-t border-white/10 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <FloatingParticles />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -960,6 +929,7 @@ export default function HomePage() {
         <HeroSection />
         <FeaturesSection />
         <PricingSection />
+        <FAQSection />
       </main>
       <Footer />
     </div>
